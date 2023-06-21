@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>To Do List</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>To do list</h2>
+    <hr>
+    <a th:href="@{/taskform}" class="btn btn-primary btn-sm mb-3">Add Task</a>
+
+    <a th:href="@{/archive}" class="btn btn-primary btn-sm mb-3">Archive</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tempRow : ${toDoList}">
+
+                <td th:text="${tempRow.title}"/>
+                <td th:text="${tempRow.description}"/>
+                <td>
+                    <a class="btn btn-info btn-sm" th:href="@{/taskformForUpdate(taskId=${tempRow.id})}">
+                        Update
+                    </a>
+
+                    <a class="btn btn-warning btn-sm" th:href="@{/toArchive(taskId=${tempRow.id})}">
+                        Archive
+                    </a>
+
+                    <a class="btn btn-danger btn-sm" th:href="@{/delete(taskId=${tempRow.id})}">
+                        Delete
+                    </a>
+
+
+                </td>
+
+
+
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>
